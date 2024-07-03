@@ -1,4 +1,4 @@
-import { Injectable, effect, inject } from '@angular/core';
+import { Injectable, Signal, effect, inject } from '@angular/core';
 import { AuthenticationStore } from '../store';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,12 @@ export class AuthenticationApplication {
       this.router.navigate(['home']);
     }
   });
+  
   login(login: string, password: string) {
     this.store.logIn({ login, password})
+  }
+
+  get isLoading(): Signal<boolean> {
+     return this.store.isLoading;
   }
 }
